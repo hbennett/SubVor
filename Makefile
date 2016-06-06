@@ -37,11 +37,11 @@ shapes:
 random_examples:
 	python benchmarks/gen_segs.py 20 -d 300
 	./subvor test_segs_d_300_20 &
-	./subvor test_segs_d_300_20 --geps=0.001 &
+	./subvor test_segs_d_300_20 --geps=0.001 --grid=false &
 	python benchmarks/gen_mixed.py 10 10 
-	./subvor test_mixed_10_pts_10_sgs --geps=0.001 &
+	./subvor test_mixed_10_pts_10_sgs --geps=0.001 --grid=false &
 	python benchmarks/gen_points.py 20 -m -l 10
-	./subvor test_m_l_10_20 --geps=0.001 &
+	./subvor test_m_l_10_20 --geps=0.001 --grid=false &
 
 conics:
 	./subvor benchmarks/conics/ellipse &
