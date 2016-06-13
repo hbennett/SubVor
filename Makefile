@@ -1,12 +1,22 @@
-CXX = g++-5
-CXXFLAGS = -std=c++11 -g
+# Designed to work on Linux/MacOS.
+# Thanks to David Bommes for suggestions about how to compile on MacOS.
 
+# Operating system dependent variables.
+ifeq ($(shell uname -s), Linux)
+	CXX = g++-5
+	LIB_BOOST_PO = -lboost_program_options
+else # uname = "Darwin" (i.e. MacOS)
+	CXX = clang++
+	LIB_BOOST_PO = -lboost_program_options-mt
+endif
+
+CXXFLAGS = -std=c++11 -g
 TARGET = subvor
 SRCS = $(wildcard *.cpp)
 OBJS = ${SRCS:.cpp=.o}
 DEPS = $(SRCS:.cpp=.depends)
 
-INCLUDE=-lpng -lboost_program_options -L/usr/lib -lglut -lglui -lGLU -lGL
+INCLUDE=-lpng $(LIB_BOOST_PO) -L/usr/lib -lglut -lglui -lGLU -lGL
 
 # Build commands.
 all: $(TARGET)
@@ -21,7 +31,7 @@ $(TARGET): $(OBJS)
 	$(CXX) -M $(CXXFLAGS) $< > $@
 
 clean:
-	rm -f *~ *.o test_* $(TARGET)
+	rm -f *~ *.o test_* benchmarks/*.pyc benchmarks/test_* $(TARGET)
 
 # Test commands.
 paper_figures:

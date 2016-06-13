@@ -102,7 +102,7 @@ void init_options(int argc, char* argv[]) {
   desc.add_options()
     ("help", "Print this help message.")
     ("geps", po::value<double>(&geom_eps)->default_value(1.0), "Geometric epsilon.")
-    ("aeps", po::value<double>(&abs_eps)->default_value(1.0d / (1 << 6)), "Absolute epsilon.")
+    ("aeps", po::value<double>(&abs_eps)->default_value(1.0 / (1 << 6)), "Absolute epsilon.")
     ("save", po::value<bool>(&save_image)->default_value(false), "Save an image of the construction.")
     ("display", po::value<bool>(&display_image)->default_value(true), "Display the consturcted Voronoi diagram.")
     ("grid", po::value<bool>(&show_grid)->default_value(true), "Display the quadtree grid.")
